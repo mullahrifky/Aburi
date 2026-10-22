@@ -35,7 +35,11 @@ input{flex:1;min-width:0;border:2px solid var(--line);background:var(--bg);color
 input:focus{border-color:var(--pri)}
 .send{border:0;background:var(--pri);color:#fff;border-radius:999px;padding:0 18px;font:inherit;font-weight:800;cursor:pointer}
 .mouth{transition:d .2s}
-.poem{font-style:italic;max-width:92%;line-height:1.65;border-left:4px solid var(--pri)}
+.cards{display:flex;gap:10px;align-self:flex-start;width:min(100%,340px);animation:pop .25s ease}
+.card{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:18px 8px;border:2px solid var(--pri);background:var(--card);color:var(--ink);border-radius:20px;font:inherit;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 0 var(--line);transition:transform .12s,background .12s,box-shadow .12s}
+.card:hover,.card:focus-visible{background:var(--bot);transform:translateY(-3px);box-shadow:0 7px 0 var(--line);outline:none}
+.card:active{transform:translateY(1px);box-shadow:0 2px 0 var(--line)}
+.ce{font-size:44px;line-height:1}
 #go{position:fixed;inset:0;z-index:30;background:linear-gradient(135deg,#ff7a3d,#ffb36b);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#fff;text-align:center;padding:24px}
 #go[hidden]{display:none}
 #go h2{margin:0;font-size:26px}
@@ -85,7 +89,7 @@ input:focus{border-color:var(--pri)}
 var NOMOR_RIFKY = ""; // isi nomor Bang Rifky, contoh "+6281234567890"
 // ========================
 var G = [
-"Muna, kamu tau nggak bedanya kamu sama Wi-Fi? Kalau Wi-Fi bikin aku konek, kalau kamu bikin aku jatuh hati.",
+"Muna, kamu tau nggak bedanya kamu sama Wi-Fi? Kalau Wi-Fi bikin Bang Rifky konek, kalau kamu bikin Bang Rifky jatuh hati.",
 "Muna, kamu pasti capek ya? Soalnya dari tadi muter-muter terus di pikiran Bang Rifky.",
 "Kata Bang Rifky, Muna itu kayak kopi. Pahitnya hidup nggak kerasa kalau ada Muna.",
 "Muna, kamu kok bisa bikin Bang Rifky salah tingkah? Padahal dia bosnya Aburi, biasanya galak.",
@@ -134,7 +138,7 @@ function intro(){say('Halo! Perkenalkan, namaku Aburi, si bebek gemoy yang palin
 function setName(n){awaitName=false;name=n.charAt(0).toUpperCase()+n.slice(1);
  if(/muna/i.test(n)){say('Wah, beneran Muna?! Pantesan layar rasanya tiba-tiba lebih terang. Bang Rifky sering banget nyebut namamu lho! 🥹','love',null,menuList())}
  else say('Salam kenal, '+name+'! Tapi aku lagi nyari yang namanya Muna, kalau lihat tolong kabari ya. 👀','wow',null,menuList())}
-function menuList(){return [['✊ Main Suit',suit],['💘 Gombalin aku',gombal],['📞 Soal Bang Rifky',rifky],['📸 Foto bareng',foto],['📜 Puisi untuk Muna',puisi],['🎵 Lagu latar',lagu]]}
+function menuList(){return [['✊ Main Suit',suit],['💘 Gombalin aku',gombal],['📞 Soal Bang Rifky',rifky],['📸 Foto bareng',foto],['📋 Survei kecil',survei],['🎵 Lagu latar',lagu]]}
 function rifky(){say('Bang Rifky itu bosku. Orangnya baik, sabar, dan diam-diam sering nanya kabar '+name+' ke Aburi. Katanya jangan bilang-bilang, tapi Aburi nggak tahan. 🤭','love',null,menuList())}
 function gombal(){if(used.length>=G.length)used=[];var i;do{i=Math.floor(Math.random()*G.length)}while(used.indexOf(i)>-1);used.push(i);
  say(G[i].replace(/Muna/g,name),'love',null,[['😳 Baper',function(){say('Yeay, Aburi berhasil! Nanti Aburi laporin ke Bang Rifky. 🎉','love',null,[['💘 Lagi dong',gombal],['✊ Main Suit',suit]])}],['🤢 Geli ih',function(){say('Aduh, ditolak. Tapi pipi kamu merah kok, Aburi lihat. 😝','sad',null,[['💘 Coba lagi',gombal],['✊ Main Suit',suit]])}],['🏠 Menu',function(){say('Mau ngapain lagi?','happy',null,menuList())}]])}
@@ -160,7 +164,7 @@ var K=[[/^(hai|halo|hi|hey|p)\b/i,['Halo juga, '+'cantik! Aburi senang banget ka
 [/sayang|cinta|love/i,['Wah jangan bilang ke Aburi, bilang ke Bang Rifky! 📞💘']],
 [/makasih|terima kasih|thanks/i,['Sama-sama! Aburi cuma anak buah, tapi dibayar pakai senyum kamu. 🥰']],
 [/ih|gak|nggak|enggak|bukan/i,['Hmm, katanya nggak, tapi pipinya merah. 😝']],
-[/puisi|sajak/i,[null,'puisi']],[/lagu|musik|kahitna/i,[null,'lagu']],[/foto|selfie|kamera/i,[null,'foto']],[/suit|main|game/i,[null,'suit']],[/gombal|rayu/i,[null,'gombal']],[/kenal|siapa/i,[null,'intro']]];
+[/survei|survey|sensus/i,[null,'survei']],[/lagu|musik|kahitna/i,[null,'lagu']],[/foto|selfie|kamera/i,[null,'foto']],[/suit|main|game/i,[null,'suit']],[/gombal|rayu/i,[null,'gombal']],[/kenal|siapa/i,[null,'intro']]];
 var D=['Hehe, Aburi belum ngerti, tapi Aburi ngerti satu hal: kamu menggemaskan. 🍊','Coba ketik “gombal”, “suit”, atau “Rifky”. Aburi lebih jago di situ!','Aburi lagi mikir keras... hasilnya: Muna itu spesial. 💘','Kamu ngomong apa sih? Lucu banget, Aburi jadi ketawa sendiri.'];
 function reply(t){if(awaitName){setName(t.replace(/^(aku|nama(ku)?|saya)\s*/i,'').trim()||'Muna');return}
  for(var i=0;i<K.length;i++){if(K[i][0].test(t)){var r=K[i][1];if(r[0]===null){window[r[1]]();return}say(r[Math.floor(Math.random()*r.length)].replace(/Muna/g,name),'love',null,menuList());return}}
@@ -185,7 +189,7 @@ function hasil(c){closeCam();var u=c.toDataURL('image/jpeg',.92),d=document.crea
  HAND='heart';avatar('love','heart');
  setTimeout(function(){say('Wah katanya malaikat itu kasat mata, kok malaikat ini keliatan.....ehh rupanya kak '+name+' deng 😳💘','love',function(){say('lohhh ini karakter kartun cars? Lightning MyQueen 😏🏎️💘','wow',null,[['📸 Foto lagi',foto],['💘 Gombalin aku',gombal],['✊ Main Suit',suit]])})},600)}
 // ===== DAFTAR LAGU: taruh file mp3 di folder "lagu" lalu sesuaikan nama file di bawah =====
-var LAGU=[{t:'Kahitna – Cantik',src:'Kahitna - Cantik (Official Music Video).mp3'},{t:'Ronny Parulian – Tak Ada Sepertimu',src:'Rony Parulian - Tak Ada Yang Sepertimu (Official Lyric Video).mp3'}],au=new Audio(),mus=document.getElementById('mus'),cur=-1,musAuto=false;au.volume=.35;
+var LAGU=[{t:'Kahitna – Cantik',src:'lagu/cantik.mp3'},{t:'Ronny Parulian – Tak Ada Sepertimu',src:'lagu/tak-ada-sepertimu.mp3'}],au=new Audio(),mus=document.getElementById('mus'),cur=-1,musAuto=false;au.volume=.35;
 function pick(){var i;do{i=Math.floor(Math.random()*LAGU.length)}while(LAGU.length>1&&i===cur);cur=i;return LAGU[i]}
 function stopMus(){au.pause();mus.classList.remove('on');mus.title='Putar lagu latar (acak)'}
 function playing(){return !!(au.src&&!au.paused)}
@@ -198,10 +202,18 @@ function lagu(){var m=playing()?'Lagu latarnya lagi diputar nih: '+LAGU[cur].t+'
 mus.onclick=function(){if(playing()){stopMus();return}if(au.src){au.play();mus.classList.add('on')}else startRandom()};
 document.addEventListener('click',function(e){if(musAuto||mus.contains(e.target))return;musAuto=true;startRandom()},true);
 document.getElementById('gob').onclick=function(){document.getElementById('go').hidden=true;if(!musAuto){musAuto=true;startRandom()}};
-var PUISI=['Barangkali kamu tercipta dari sejuknya embun pagi hari yang menenangkan jiwa.','dari serpihan surga yang tuhan ukir bersama indah-Nya','Dari untaian doa-doa yang dipanjatkan pada-Nya.','Dari rasa aman yang mengantar damai, lalu tumbuh dalam senyuman.','','Terbuat dari apakah dirimu hingga mampu membuatku jatuh?','Senyum indah, dan membuatku luluh lantah','Menyeruak dalam ruang resah tanpa nada','','Maka, biarkanlah rasa dan asa kusampaikan padamu','dalam setiap rangkaian kata yang ada disini'];
-function puisi(){say('Ssst... ini titipan puisi dari Bang Rifky untuk '+name+'. Aburi bacain pelan-pelan ya. 📜','love',function(){var d=document.createElement('div'),i=0;d.className='m b poem';d.textContent='📜 Puisi untuk '+name+'\n';chat.appendChild(d);(function nx(){if(i>=PUISI.length){say('Itu dari Bang Rifky, '+name+'. Katanya kalau ditanya, bilang saja Aburi yang nulis. 🥹','love',null,menuList());return}d.textContent+='\n'+PUISI[i++];scroll();setTimeout(nx,PUISI[i-1]?1500:700)})()})}
+var SA=[],SV=[
+['Senja atau Fajar?',['🌅 Senja','Senja memang singkat tapi selalu dinanti... tapi kalau Bang Rifky, mau singkat atau lama, yang dinanti cuma kamu. 🌅'],['☀️ Fajar','Fajar itu awal dari hari yang baru, tapi buat Bang Rifky, awal bahagianya itu dimulai pas kenal kamu. ☀️']],
+['Es Krim atau Cokelat?',['🍦 Es Krim','Pantes pilih es krim, soalnya senyuman kamu aja udah cukup buat bikin hati Bang Rifky meleleh. 🍦🫠'],['🍫 Cokelat','Cokelat emang manis, tapi tetep aja masih kalah manis sama kamu. 🍫❤️']],
+['Hujan atau Panas?',['🌧️ Hujan','Hujan bikin dingin, tapi untungnya mikirin kamu selalu bisa bikin hati Bang Rifky terasa hangat. 🌧️☕'],['☀️ Panas','Panas terik matahari aja nggak ada apa-apanya dibanding rasa hangat yang Bang Rifky rasain pas ada di samping kamu. ☀️✨']],
+['Mie Instan atau Pizza?',['🍜 Mie Instan','Mie instan emang gampang bikin nagih, tapi nagihnya Bang Rifky ke kamu jauh lebih parah. 🍜😋'],['🍕 Pizza','Pizza itu dipotong berapapun tetep dibagi-bagi, tapi kalau hati Bang Rifky udah utuh cuma buat kamu seorang. 🍕❤️']],
+['Gunung atau Laut?',['⛰️ Gunung','Setinggi-tingginya gunung yang harus didaki Bang Rifky, bakal Bang Rifky jajah demi bisa dapet senyuman kamu. ⛰️'],['🌊 Laut','Sedalam-dalamnya laut, masih lebih dalam perasaan cinta Bang Rifky ke kamu. 🌊💙']],
+['Masa Lalu atau Masa Depan?',['⏳ Masa Lalu','Masa lalu emang nggak bisa diubah, tapi Bang Rifky bersyukur karena masa lalu membawa Bang Rifky ketemu sama kamu. ⏳'],['🚀 Masa Depan','Pilihan bagus, soalnya di masa depan nanti, Bang Rifky udah nyiapin tempat teristimewa khusus buat kamu. 🚀💍']]];
+function survei(){SA=[];say('Knock... knock... punten, sensus kak '+name+'! Tenang kakk, survei ini tidak mempengaruhi desil kokkk','wow',function(){tanya(0)})}
+function tanya(i){var q=SV[i];say('('+(i+1)+'/'+SV.length+') '+q[0],'happy',function(){var w=document.createElement('div');w.className='cards';[q[1],q[2]].forEach(function(o){var b=document.createElement('button'),e=document.createElement('span'),l=document.createElement('span'),lb=o[0].replace(/^\S+\s/,'');e.className='ce';e.textContent=o[0].split(' ')[0];l.textContent=lb;b.className='card';b.appendChild(e);b.appendChild(l);b.onclick=function(){w.remove();msg(o[0],'u');SA.push(lb);say(o[1],'love',function(){if(i+1<SV.length)tanya(i+1);else selesai()})};w.appendChild(b)});chat.appendChild(w);scroll()})}
+function selesai(){say('Survei selesai! Jawaban '+name+': '+SA.join(' · ')+' 📝\nSemua sudah Aburi laporkan ke Bang Rifky. Hasil sensus: '+name+' resmi tercatat sebagai penduduk tetap hati Bang Rifky. 🏡💘','love',null,menuList())}
 document.getElementById('f').onsubmit=function(e){e.preventDefault();var t=inp.value.trim();if(!t)return;inp.value='';msg(t,'u');reply(t)};
-say('Psst... ada yang datang! Hai, aku Aburi. Ini pasti Muna, kan? 👀','wow',null,[['👋 Kenalan dulu',intro],['✊ Main Suit',suit],['💘 Gombalin aku',gombal],['📞 Soal Bang Rifky',rifky],['📸 Foto bareng',foto],['📜 Puisi untuk Muna',puisi],['🎵 Lagu latar',lagu]]);
+say('Psst... ada yang datang! Hai, aku Aburi. Ini pasti Muna, kan? 👀','wow',null,[['👋 Kenalan dulu',intro],['✊ Main Suit',suit],['💘 Gombalin aku',gombal],['📞 Soal Bang Rifky',rifky],['📸 Foto bareng',foto],['📋 Survei kecil',survei],['🎵 Lagu latar',lagu]]);
 </script>
 </body>
 </html>
