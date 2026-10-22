@@ -185,7 +185,7 @@ function hasil(c){closeCam();var u=c.toDataURL('image/jpeg',.92),d=document.crea
  HAND='heart';avatar('love','heart');
  setTimeout(function(){say('Wah katanya malaikat itu kasat mata, kok malaikat ini keliatan.....ehh rupanya kak '+name+' deng 😳💘','love',function(){say('lohhh ini karakter kartun cars? Lightning MyQueen 😏🏎️💘','wow',null,[['📸 Foto lagi',foto],['💘 Gombalin aku',gombal],['✊ Main Suit',suit]])})},600)}
 // ===== DAFTAR LAGU: taruh file mp3 di folder "lagu" lalu sesuaikan nama file di bawah =====
-var LAGU=[{t:'Kahitna – Cantik',src:'lagu/cantik.mp3'},{t:'Ronny Parulian – Tak Ada Sepertimu',src:'lagu/tak-ada-sepertimu.mp3'}],au=new Audio(),mus=document.getElementById('mus'),cur=-1,musAuto=false;au.volume=.35;
+var LAGU=[{t:'Kahitna – Cantik',src:'Kahitna - Cantik (Official Music Video).mp3'},{t:'Ronny Parulian – Tak Ada Sepertimu',src:'lagu/tak-ada-sepertimu.mp3'}],au=new Audio(),mus=document.getElementById('mus'),cur=-1,musAuto=false;au.volume=.35;
 function pick(){var i;do{i=Math.floor(Math.random()*LAGU.length)}while(LAGU.length>1&&i===cur);cur=i;return LAGU[i]}
 function stopMus(){au.pause();mus.classList.remove('on');mus.title='Putar lagu latar (acak)'}
 function playing(){return !!(au.src&&!au.paused)}
