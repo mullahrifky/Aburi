@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aburi – Anak Buah Rifky</title>
+<style>
+:root{--bg:#fff4ec;--card:#ffffff;--ink:#3b2a22;--mute:#8a6f60;--pri:#ff7a3d;--pri2:#ffb36b;--bot:#ffe6d3;--me:#ff7a3d;--meink:#fff;--line:#f3d9c6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#241812;--card:#33231b;--ink:#fbe9dc;--mute:#c4a28f;--bot:#47301f;--line:#4a3427}}
+:root[data-theme="dark"]{--bg:#241812;--card:#33231b;--ink:#fbe9dc;--mute:#c4a28f;--bot:#47301f;--line:#4a3427}
+html,body{height:100%;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:"Nunito","Segoe UI",system-ui,sans-serif;display:flex;justify-content:center}
+.app{width:100%;max-width:520px;height:100%;display:flex;flex-direction:column;background:var(--card)}
+header{display:flex;align-items:center;gap:12px;padding:12px 16px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff}
+header h1{font-size:18px;margin:0}
+header small{opacity:.9;font-size:12px}
+#av{width:56px;height:56px;flex:none;background:#fff3;border-radius:50%}
+#av svg{width:100%;height:100%;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-3px)}}
+#chat{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:var(--bg)}
+.m{max-width:80%;padding:9px 13px;border-radius:18px;line-height:1.4;font-size:15px;white-space:pre-wrap;word-wrap:break-word;animation:pop .2s ease}
+@keyframes pop{from{transform:scale(.9);opacity:0}}
+.b{background:var(--bot);align-self:flex-start;border-bottom-left-radius:4px}
+.u{background:var(--me);color:var(--meink);align-self:flex-end;border-bottom-right-radius:4px}
+.t{color:var(--mute);font-size:13px}
+.ch{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start}
+.ch button,.call{border:2px solid var(--pri);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 13px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.ch button:hover,.call:hover{background:var(--pri);color:#fff}
+.call{display:inline-block;text-decoration:none;background:#2fb55e;border-color:#2fb55e;color:#fff;margin-top:6px}
+.score{font-size:12px;color:var(--mute);align-self:center}
+form{display:flex;gap:8px;padding:10px 12px;background:var(--card);border-top:1px solid var(--line)}
+input{flex:1;min-width:0;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:10px 14px;font:inherit;font-size:15px;outline:none}
+input:focus{border-color:var(--pri)}
+.send{border:0;background:var(--pri);color:#fff;border-radius:999px;padding:0 18px;font:inherit;font-weight:800;cursor:pointer}
+.mouth{transition:d .2s}
+.poem{font-style:italic;max-width:92%;line-height:1.65;border-left:4px solid var(--pri)}
+#go{position:fixed;inset:0;z-index:30;background:linear-gradient(135deg,#ff7a3d,#ffb36b);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#fff;text-align:center;padding:24px}
+#go[hidden]{display:none}
+#go h2{margin:0;font-size:26px}
+#go p{margin:0;opacity:.95}
+#go button{border:0;background:#fff;color:#e8590c;border-radius:999px;padding:12px 26px;font:inherit;font-size:17px;font-weight:800;cursor:pointer;animation:bob 1.6s ease-in-out infinite}
+#mus{margin-left:auto;flex:none;border:0;background:rgba(255,255,255,.25);color:#fff;border-radius:50%;width:42px;height:42px;font-size:20px;cursor:pointer}
+#mus.on{animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#mas{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(74px + env(safe-area-inset-bottom,0px));width:76px;height:76px;cursor:pointer;z-index:5;filter:drop-shadow(0 6px 8px rgba(0,0,0,.25));-webkit-tap-highlight-color:transparent}
+#mas svg{width:100%;height:100%;animation:bob 2.4s ease-in-out infinite}
+#mas.hop svg{animation:hop .5s}
+#mas.shake svg{animation:shk .25s 3}
+@keyframes shk{25%{transform:rotate(-7deg) translateY(-6px)}75%{transform:rotate(7deg) translateY(-6px)}}
+@keyframes hop{30%{transform:translateY(-14px) rotate(-8deg)}60%{transform:translateY(0) rotate(6deg)}}
+#bub{position:absolute;right:0;bottom:100%;margin-bottom:4px;width:max-content;max-width:190px;background:var(--card);color:var(--ink);border:2px solid var(--pri);border-radius:14px;padding:6px 10px;font-size:13px;font-weight:700;opacity:0;transform:scale(.8);transform-origin:bottom right;transition:.2s;pointer-events:none}
+#bub.on{opacity:1;transform:none}
+#chat{padding-bottom:96px}
+#cam{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:20;display:flex;align-items:center;justify-content:center;padding:12px}
+#cam[hidden]{display:none}
+#cam .box{background:var(--card);border-radius:20px;padding:12px;width:min(94vw,440px);max-height:96vh;overflow:auto;text-align:center}
+.frame{position:relative;width:min(100%,calc(58vh*0.75));aspect-ratio:3/4;margin:0 auto;border-radius:14px;overflow:hidden;background:#222}
+.frame video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+#pose{position:absolute;right:2%;bottom:0;height:48%;pointer-events:none}
+#cd{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:96px;font-weight:900;color:#fff;text-shadow:0 2px 14px #000;pointer-events:none}
+#camNote{font-size:13px;color:var(--mute);margin:8px 0 2px}
+.pb{border:2px solid var(--pri);background:var(--pri);color:#fff;border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;font-weight:800;cursor:pointer;margin:4px;display:inline-block}
+.pb.o{background:var(--card);color:var(--ink)}
+.pb:disabled{opacity:.45}
+@media(min-width:1100px){#mas{width:150px;height:150px;right:6vw;bottom:28px}#bub{font-size:15px;max-width:240px}#chat{padding-bottom:14px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<div id="av"></div>
+<div><h1>Aburi</h1><small>Anak Buah Bang Rifky · online 24 jam 💘</small></div>
+<button id="mus" title="Putar lagu latar (acak)" aria-label="Lagu latar">🎵</button><input type="file" id="fileM" accept="audio/*" hidden>
+</header>
+<div id="chat" aria-live="polite"></div>
+<div id="mas" title="Colek Aburi"><div id="bub"></div><div id="mas-svg"></div></div>
+<div id="go"><div style="font-size:72px">🦆</div><h2>Aburi mau ketemu Muna</h2><p>Ketuk tombol di bawah, lagu latar langsung menyala.</p><button id="gob">💘 Ketuk untuk mulai</button></div>
+<div id="cam" hidden><div class="box"><div class="frame"><video id="vid" playsinline muted autoplay></video><img id="pose" alt=""><div id="cd"></div></div><p id="camNote"></p><div><button class="pb" id="snap" disabled>📸 Jepret!</button><label class="pb o">🖼️ Ambil foto<input type="file" id="file" accept="image/*" capture="user" hidden></label><button class="pb o" id="xcam">Tutup</button></div></div></div>
+<form id="f"><input id="in" placeholder="Ketik pesan untuk Aburi..." autocomplete="off"><button class="send">Kirim</button></form>
+</div>
+<script>
+// ====== PENGATURAN ======
+var NOMOR_RIFKY = ""; // isi nomor Bang Rifky, contoh "+6281234567890"
+// ========================
+var G = [
+"Muna, kamu tau nggak bedanya kamu sama Wi-Fi? Kalau Wi-Fi bikin aku konek, kalau kamu bikin aku jatuh hati.",
+"Muna, kamu pasti capek ya? Soalnya dari tadi muter-muter terus di pikiran Bang Rifky.",
+"Kata Bang Rifky, Muna itu kayak kopi. Pahitnya hidup nggak kerasa kalau ada Muna.",
+"Muna, kamu kok bisa bikin Bang Rifky salah tingkah? Padahal dia bosnya Aburi, biasanya galak.",
+"Muna, kamu bukan kalender, tapi kenapa hari-hariku jadi berarti sejak ada kamu?",
+"Ada yang bilang matahari itu terang. Mereka belum lihat senyum Muna.",
+"Muna, kamu tau nggak apa persamaan kamu sama jam? Sama-sama bikin Bang Rifky nungguin.",
+"Kalau Muna jadi lagu, Bang Rifky bakal puter terus sampai baterai habis.",
+"Muna, kamu itu kayak ulangan dadakan. Bikin deg-degan, tapi pengen dihadapi terus.",
+"Aburi cuma anak buah, tapi Aburi yakin: bos Aburi udah resmi jadi penggemar nomor satu Muna.",
+"Muna, kamu pasti dari surga ya? Soalnya senyummu bikin Bang Rifky lupa jalan pulang.",
+"Katanya cinta itu buta. Tapi Bang Rifky kok bisa lihat Muna dari jauh? Ternyata terangnya sampai sini.",
+"Muna, kamu mirip pulsa. Kalau nggak ada, Bang Rifky merasa nggak bisa ngapa-ngapain.",
+"Mau tau rahasia? Tiap Aburi disuruh Bang Rifky, ujung-ujungnya nanya: Muna lagi apa?"
+];
+var chat=document.getElementById('chat'),inp=document.getElementById('in');
+var name='Muna',used=[],wins=0,loses=0,awaitName=false;
+var moods={happy:'M20 40 Q32 52 44 40',love:'M20 38 Q32 56 44 38',sad:'M22 48 Q32 38 42 48',wow:'M28 42 Q32 52 36 42 Q32 38 28 42'};
+function avatar0(m){var heart=m==='love';document.getElementById('av').innerHTML='<svg viewBox="0 0 64 64"><path d="M32 6 C14 6 8 22 8 34 C8 52 20 58 32 58 C44 58 56 52 56 34 C56 22 50 6 32 6Z" fill="#ff7a3d"/><path d="M26 8 Q32 0 38 8" stroke="#ff7a3d" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="23" cy="30" r="5" fill="#fff"/><circle cx="41" cy="30" r="5" fill="#fff"/><circle cx="24" cy="31" r="2.6" fill="#3b2a22"/><circle cx="42" cy="31" r="2.6" fill="#3b2a22"/><ellipse cx="15" cy="40" rx="5" ry="3" fill="#ff9aa8" opacity=".8"/><ellipse cx="49" cy="40" rx="5" ry="3" fill="#ff9aa8" opacity=".8"/><path class="mouth" d="'+moods[m||'happy']+'" stroke="#3b2a22" stroke-width="3" fill="'+(m==='wow'?'#3b2a22':'none')+'" stroke-linecap="round"/>'+(heart?'<text x="46" y="14" font-size="14">💖</text>':'')+'</svg>'}
+var HAND=null,OR='#ffc93c',DK='#e39a1d',LT='#ffe48a';
+function hg(h,x,y){var s='fill="'+LT+'" stroke="'+DK+'" stroke-width="1.6"',o='<g transform="translate('+x+' '+y+')">';
+ if(h===0)o+='<circle r="7" '+s+'/><path d="M-4 -1H4M-4 2H4" stroke="'+DK+'" stroke-width="1.4"/>';
+ else if(h===1)o+='<g transform="rotate(-16)"><rect x="-4" y="-17" width="4.6" height="14" rx="2.3" '+s+'/></g><g transform="rotate(16)"><rect x="-0.6" y="-17" width="4.6" height="14" rx="2.3" '+s+'/></g><circle cy="2" r="6" '+s+'/>';
+ else{[-40,-20,0,20,40].forEach(function(a){o+='<g transform="rotate('+a+')"><rect x="-1.9" y="-17" width="3.8" height="12" rx="1.9" '+s+'/></g>'});o+='<circle cy="1" r="7" '+s+'/>'}
+ return o+'</g>'}
+function build0(m,h){var up=(h===0||h===1||h===2),hh=(h==='heart'),st='stroke-width="7" stroke-linecap="round" stroke="'+OR+'"';
+ return '<ellipse cx="23" cy="87" rx="8" ry="4" fill="'+DK+'"/><ellipse cx="41" cy="87" rx="8" ry="4" fill="'+DK+'"/><ellipse cx="32" cy="68" rx="17" ry="17" fill="'+OR+'"/><ellipse cx="32" cy="71" rx="10" ry="10" fill="'+LT+'"/><path d="'+(hh?'M16 62 L4 54':'M16 62 L6 73')+'" '+st+' fill="none"/><path d="'+(up?'M48 62 L60 53':'M48 62 L58 73')+'" '+st+' fill="none"/>'
+ +'<path d="M32 6 C14 6 8 22 8 34 C8 52 20 58 32 58 C44 58 56 52 56 34 C56 22 50 6 32 6Z" fill="'+OR+'"/><path d="M26 8 Q32 0 38 8" stroke="'+OR+'" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="23" cy="30" r="5" fill="#fff"/><circle cx="41" cy="30" r="5" fill="#fff"/><circle cx="24" cy="31" r="2.6" fill="#3b2a22"/><circle cx="42" cy="31" r="2.6" fill="#3b2a22"/><ellipse cx="15" cy="40" rx="5" ry="3" fill="#ff9aa8" opacity=".8"/><ellipse cx="49" cy="40" rx="5" ry="3" fill="#ff9aa8" opacity=".8"/><path d="'+moods[m||'happy']+'" stroke="#3b2a22" stroke-width="3" fill="'+(m==='wow'?'#3b2a22':'none')+'" stroke-linecap="round"/>'+(m==='love'?'<text x="46" y="14" font-size="14">💖</text>':'')+(up?hg(h,61,47):'')+(hh?'<g transform="translate(-3 50) scale(1.3)"><path d="M0 10 C8 4 13 -2 11 -7 C9 -12 2 -11 0 -5Z" fill="#ff5e7e" stroke="#d63a5c" stroke-width="1.4"/></g>':'')}
+function build(m,h){var up=(h===0||h===1||h===2),hh=(h==='heart'),st='stroke-width="7" stroke-linecap="round" fill="none" stroke="'+OR+'"',E=function(x,y){return '<circle cx="'+x+'" cy="'+y+'" r="4.4" fill="#3b2a22"/><circle cx="'+(x+1.5)+'" cy="'+(y-1.5)+'" r="1.5" fill="#fff"/>'},sm={happy:'M26 49 Q32 54 38 49',love:'M25 49 Q32 57 39 49',sad:'M27 51 Q32 46 37 51',wow:''}[m||'happy'];
+ return '<ellipse cx="23" cy="87" rx="8" ry="4" fill="#ff8a2a"/><ellipse cx="41" cy="87" rx="8" ry="4" fill="#ff8a2a"/><ellipse cx="32" cy="68" rx="17" ry="17" fill="'+OR+'"/><ellipse cx="32" cy="71" rx="10" ry="10" fill="'+LT+'"/><path d="'+(hh?'M16 62 L4 54':'M16 62 L6 73')+'" '+st+'/><path d="'+(up?'M48 62 L60 53':'M48 62 L58 73')+'" '+st+'/>'
+ +'<ellipse cx="32" cy="34" rx="26" ry="24" fill="'+OR+'" stroke="'+DK+'" stroke-width="1.5"/><path d="M30 12 Q25 2 32 5 M34 12 Q41 3 43 9" stroke="'+OR+'" stroke-width="3.5" fill="none" stroke-linecap="round"/>'+E(21,30)+E(43,30)
+ +'<ellipse cx="12" cy="41" rx="5" ry="3.4" fill="#ff9aa8" opacity=".85"/><ellipse cx="52" cy="41" rx="5" ry="3.4" fill="#ff9aa8" opacity=".85"/><ellipse cx="32" cy="41" rx="12" ry="6.5" fill="#ff8a2a" stroke="#e0621a" stroke-width="1.5"/>'
+ +(m==='wow'?'<ellipse cx="32" cy="46.5" rx="7" ry="3.6" fill="#7a2e12"/>':'<path d="'+sm+'" stroke="#3b2a22" stroke-width="2.4" fill="none" stroke-linecap="round"/>')
+ +(m==='love'?'<text x="46" y="12" font-size="14">💖</text>':'')+(up?hg(h,61,47):'')+(hh?'<g transform="translate(-3 50) scale(1.3)"><path d="M0 10 C8 4 13 -2 11 -7 C9 -12 2 -11 0 -5Z" fill="#ff5e7e" stroke="#d63a5c" stroke-width="1.4"/></g>':'')}
+function avatar(m,h){var b=build(m,h);document.getElementById('av').innerHTML='<svg viewBox="0 0 64 64">'+b+'</svg>';document.getElementById('mas-svg').innerHTML='<svg viewBox="-8 0 80 94">'+b+'</svg>'}
+avatar();
+var mas=document.getElementById('mas'),bub=document.getElementById('bub'),bt,POKE=['Hihi, geli! 🤭','Eh, jangan dicolek terus, Aburi jadi baper!','Aburi di sini, siap jadi comblang! 💘','Kata Bang Rifky: Muna lagi apa? 👀','Ayo suit, berani nggak? ✊','Colek lagi, nanti Aburi lapor Bang Rifky! 😝'];
+mas.onclick=function(){mas.classList.remove('hop');void mas.offsetWidth;mas.classList.add('hop');bub.textContent=POKE[Math.floor(Math.random()*POKE.length)];bub.classList.add('on');clearTimeout(bt);bt=setTimeout(function(){bub.classList.remove('on')},2200)};
+function scroll(){chat.scrollTop=chat.scrollHeight}
+function msg(t,c){if(c==='u')HAND=null;var d=document.createElement('div');d.className='m '+c;d.textContent=t;chat.appendChild(d);scroll();return d}
+function choices(list){var w=document.createElement('div');w.className='ch';list.forEach(function(x){var b=document.createElement('button');b.textContent=x[0];b.onclick=function(){w.remove();msg(x[0],'u');x[1]()};w.appendChild(b)});chat.appendChild(w);scroll()}
+function say(t,mood,cb,list){var ty=msg('Aburi sedang mengetik...','b t');setTimeout(function(){ty.remove();avatar(mood,HAND);msg(t,'b');if(cb)cb();if(list)choices(list)},500+Math.min(t.length*8,900))}
+function menu(){choices([['👋 Kenalan','intro'],['✊ Main Suit','suit'],['💘 Gombalin aku','gombal'],['📞 Soal Bang Rifky','rifky']].map(function(x){return [x[0],window[x[1]]]}))}
+function intro(){say('Halo! Perkenalkan, namaku Aburi, si bebek gemoy yang paling imut sejagat. 🍊',  'happy',function(){
+ say('Aku Anak Buah Bang Rifky. Tugasku cuma satu: memastikan Muna tahu betapa spesialnya dia. Digaji pakai gorengan.','wow',function(){
+ say('Boleh tahu nama kamu? Kalau kamu Muna, ketik saja “Muna” ya. 😳','love',function(){awaitName=true})})})}
+function setName(n){awaitName=false;name=n.charAt(0).toUpperCase()+n.slice(1);
+ if(/muna/i.test(n)){say('Wah, beneran Muna?! Pantesan layar rasanya tiba-tiba lebih terang. Bang Rifky sering banget nyebut namamu lho! 🥹','love',null,menuList())}
+ else say('Salam kenal, '+name+'! Tapi aku lagi nyari yang namanya Muna, kalau lihat tolong kabari ya. 👀','wow',null,menuList())}
+function menuList(){return [['✊ Main Suit',suit],['💘 Gombalin aku',gombal],['📞 Soal Bang Rifky',rifky],['📸 Foto bareng',foto],['📜 Puisi untuk Muna',puisi],['🎵 Lagu latar',lagu]]}
+function rifky(){say('Bang Rifky itu bosku. Orangnya baik, sabar, dan diam-diam sering nanya kabar '+name+' ke Aburi. Katanya jangan bilang-bilang, tapi Aburi nggak tahan. 🤭','love',null,menuList())}
+function gombal(){if(used.length>=G.length)used=[];var i;do{i=Math.floor(Math.random()*G.length)}while(used.indexOf(i)>-1);used.push(i);
+ say(G[i].replace(/Muna/g,name),'love',null,[['😳 Baper',function(){say('Yeay, Aburi berhasil! Nanti Aburi laporin ke Bang Rifky. 🎉','love',null,[['💘 Lagi dong',gombal],['✊ Main Suit',suit]])}],['🤢 Geli ih',function(){say('Aduh, ditolak. Tapi pipi kamu merah kok, Aburi lihat. 😝','sad',null,[['💘 Coba lagi',gombal],['✊ Main Suit',suit]])}],['🏠 Menu',function(){say('Mau ngapain lagi?','happy',null,menuList())}]])}
+function suit(){say('Ayo suit! Aturannya: kalau '+name+' kalah, wajib telepon Bang Rifky. Berani? 😎','wow',null,hand())}
+function hand(){return [['✊ Batu',function(){play(0)}],['✌️ Gunting',function(){play(1)}],['✋ Kertas',function(){play(2)}]]}
+var ic=['✊ Batu','✌️ Gunting','✋ Kertas'];
+function play(p){var a=Math.floor(Math.random()*3);msg('✊ Satu... dua... tiga!','b');HAND=0;avatar('wow',0);mas.classList.add('shake');setTimeout(function(){mas.classList.remove('shake');HAND=a;play2(p,a)},850)}
+function play2(p,a){var r=(p-a+3)%3; // 0 seri, 1 menang, 2 kalah
+ var t='Kamu: '+ic[p]+'\nAburi: '+ic[a]+'\n\n';
+ if(r===0){say(t+'Seri! Kita kompak, kayak kamu sama Bang Rifky. Ulang lagi!','wow',null,hand())}
+ else if(r===1){wins++;say(t+'Aduh, aku kalah! Kamu menang. Tapi tetap aja kamu kalah di hati Bang Rifky. 😌\n(Menang '+wins+' · Kalah '+loses+')','sad',null,[['🔁 Main lagi',suit],['💘 Gombalin aku',gombal]])}
+ else{loses++;say(t+'KALAH! Hukumannya: telepon Bang Rifky sekarang! 📞\n(Menang '+wins+' · Kalah '+loses+')','happy',function(){callBtn()},[['🔁 Balas dendam',suit],['🏠 Menu',function(){say('Mau ngapain lagi?','happy',null,menuList())}]])}}
+function callBtn(){var a=document.createElement('a');a.className='call';a.textContent='📞 Telepon Bang Rifky'+(NOMOR_RIFKY?' ('+NOMOR_RIFKY+')':'');
+ if(NOMOR_RIFKY)a.href='tel:'+NOMOR_RIFKY;else a.href='#';
+ a.onclick=function(e){if(!NOMOR_RIFKY){e.preventDefault();say('Nomor Bang Rifky belum dipasang, jadi telepon pakai hati dulu ya. 💞','love')}};
+ chat.appendChild(a);scroll()}
+var K=[[/^(hai|halo|hi|hey|p)\b/i,['Halo juga, '+'cantik! Aburi senang banget kamu datang. 🍊','Hai! Aburi kangen, padahal baru ketemu.']],
+[/rifky/i,['Bang Rifky lagi pura-pura sibuk, padahal nungguin kabar kamu. 😏','Bang Rifky itu bos Aburi. Kalau kamu mau telepon, kalah suit dulu ya!']],
+[/capek|lelah|cape/i,['Istirahat dulu ya. Kamu capek? Pantas, dari tadi lari-lari di pikiran Bang Rifky. 🫶']],
+[/bosan|bosen/i,['Bosan? Yuk main suit atau minta gombalan, Aburi siap!']],
+[/lapar|laper|makan/i,['Makan yang banyak ya. Aburi sih kenyang, udah kenyang lihat kamu. 🍜']],
+[/cantik|manis|cakep/i,['Eh, Aburi yang harusnya muji. Tapi iya, kamu memang cantik. 😳']],
+[/sayang|cinta|love/i,['Wah jangan bilang ke Aburi, bilang ke Bang Rifky! 📞💘']],
+[/makasih|terima kasih|thanks/i,['Sama-sama! Aburi cuma anak buah, tapi dibayar pakai senyum kamu. 🥰']],
+[/ih|gak|nggak|enggak|bukan/i,['Hmm, katanya nggak, tapi pipinya merah. 😝']],
+[/puisi|sajak/i,[null,'puisi']],[/lagu|musik|kahitna/i,[null,'lagu']],[/foto|selfie|kamera/i,[null,'foto']],[/suit|main|game/i,[null,'suit']],[/gombal|rayu/i,[null,'gombal']],[/kenal|siapa/i,[null,'intro']]];
+var D=['Hehe, Aburi belum ngerti, tapi Aburi ngerti satu hal: kamu menggemaskan. 🍊','Coba ketik “gombal”, “suit”, atau “Rifky”. Aburi lebih jago di situ!','Aburi lagi mikir keras... hasilnya: Muna itu spesial. 💘','Kamu ngomong apa sih? Lucu banget, Aburi jadi ketawa sendiri.'];
+function reply(t){if(awaitName){setName(t.replace(/^(aku|nama(ku)?|saya)\s*/i,'').trim()||'Muna');return}
+ for(var i=0;i<K.length;i++){if(K[i][0].test(t)){var r=K[i][1];if(r[0]===null){window[r[1]]();return}say(r[Math.floor(Math.random()*r.length)].replace(/Muna/g,name),'love',null,menuList());return}}
+ say(D[Math.floor(Math.random()*D.length)],'wow',null,menuList())}
+var cam=document.getElementById('cam'),vid=document.getElementById('vid'),snap=document.getElementById('snap'),cd=document.getElementById('cd'),stream=null,poseURL='';
+function note(t){document.getElementById('camNote').textContent=t}
+function foto(){say('Yuk foto bareng! Aku pasang pose setengah love, kamu lengkapi sisi kirinya ya. 💕','love',function(){HAND='heart';avatar('love','heart');openCam()})}
+function openCam(){cam.hidden=false;snap.disabled=true;poseURL='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 0 80 94">'+build('love','heart')+'</svg>');document.getElementById('pose').src=poseURL;note('Meminta izin kamera...');
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){noCam();return}
+ navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false}).then(function(s){stream=s;vid.srcObject=s;snap.disabled=false;note('Bikin setengah love sisi kiri, pas dengan tangan Aburi! 💕')}).catch(noCam)}
+function noCam(){snap.disabled=true;note('Kamera belum bisa dipakai di sini. Pakai tombol “Ambil foto” ya (bisa dari kamera HP atau galeri).')}
+function closeCam(){cam.hidden=true;if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}vid.srcObject=null}
+document.getElementById('xcam').onclick=closeCam;
+snap.onclick=function(){snap.disabled=true;var n=3;cd.textContent=n;var iv=setInterval(function(){n--;if(n>0){cd.textContent=n}else{clearInterval(iv);cd.textContent='';shoot(vid,true)}},900)};
+document.getElementById('file').onchange=function(e){var f=e.target.files[0];if(!f)return;var im=new Image();im.onload=function(){shoot(im,false)};im.src=URL.createObjectURL(f);e.target.value=''};
+function shoot(src,mir){var W=720,H=960,c=document.createElement('canvas');c.width=W;c.height=H;var x=c.getContext('2d'),sw=src.videoWidth||src.naturalWidth,sh=src.videoHeight||src.naturalHeight,r=W/H,cw=sw,ch=sh;
+ if(sw/sh>r)cw=sh*r;else ch=sw/r;
+ x.save();if(mir){x.translate(W,0);x.scale(-1,1)}x.drawImage(src,(sw-cw)/2,(sh-ch)/2,cw,ch,0,0,W,H);x.restore();
+ var im=new Image();im.onload=function(){var h=H*.48,w=h*80/94;x.drawImage(im,W*.98-w,H-h,w,h);x.font='bold 36px sans-serif';x.lineWidth=7;x.strokeStyle='#ff7a3d';x.fillStyle='#fff';var t=name+' & Aburi 💘';x.strokeText(t,24,60);x.fillText(t,24,60);hasil(c)};im.src=poseURL}
+function hasil(c){closeCam();var u=c.toDataURL('image/jpeg',.92),d=document.createElement('div');d.className='m b';var im=new Image();im.src=u;im.style.cssText='width:100%;max-width:260px;border-radius:12px;display:block';d.appendChild(im);
+ var a=document.createElement('a');a.href=u;a.download='foto-bareng-aburi.jpg';a.className='call';a.textContent='💾 Simpan foto';d.appendChild(a);var tp=document.createElement('div');tp.className='t';tp.textContent='Kalau tombol simpan tidak jalan, tahan lama fotonya lalu pilih simpan.';d.appendChild(tp);chat.appendChild(d);scroll();
+ HAND='heart';avatar('love','heart');
+ setTimeout(function(){say('Wah katanya malaikat itu kasat mata, kok malaikat ini keliatan.....ehh rupanya kak '+name+' deng 😳💘','love',function(){say('lohhh ini karakter kartun cars? Lightning MyQueen 😏🏎️💘','wow',null,[['📸 Foto lagi',foto],['💘 Gombalin aku',gombal],['✊ Main Suit',suit]])})},600)}
+var LAGU=[{t:'Kahitna – Cantik',id:'1cIhjuQoez-saB2ptocHdz2ngxaQIsFCE',u:'https://drive.google.com/file/d/1cIhjuQoez-saB2ptocHdz2ngxaQIsFCE/view?usp=drive_link'},{t:'Ronny Parulian – Tak Ada Sepertimu',id:'1awZnQPCoykhf--nb6PUJn7I3rDD6wBg3',u:'https://drive.google.com/file/d/1awZnQPCoykhf--nb6PUJn7I3rDD6wBg3/view?usp=drive_link'}],au=new Audio(),mus=document.getElementById('mus'),fileM=document.getElementById('fileM'),cur=-1,yt=null,musAuto=false;au.loop=true;au.volume=.35;
+function pick(){var i;do{i=Math.floor(Math.random()*LAGU.length)}while(LAGU.length>1&&i===cur);cur=i;return LAGU[i]}
+function stopMus(){au.pause();mus.classList.remove('on');mus.title='Putar lagu latar (acak)'}
+function playing(){return !!(au.src&&!au.paused)}
+var driveWarned=false;
+function linkBtn(l){var a=document.createElement('a');a.className='call';a.href=l.u;a.target='_blank';a.rel='noopener';a.textContent='▶️ Buka di Google Drive';chat.appendChild(a);scroll()}
+function driveFail(){mus.classList.remove('on');if(driveWarned||cur<0)return;driveWarned=true;var l=LAGU[cur];say('Lagunya belum bisa diputar langsung dari sini. Buka lewat link ini ya, atau pakai file sendiri. 🎧','sad',function(){linkBtn(l)},menuList())}
+function startYT(l){stopMus();musAuto=true;au.loop=false;au.src='https://drive.google.com/uc?export=download&id='+l.id;au.play().then(function(){mus.classList.add('on');mus.title='Jeda: '+l.t}).catch(driveFail)}
+au.onended=function(){if(!au.loop)startRandom()};au.onerror=function(){if(au.src.indexOf('blob:')!==0)driveFail()};
+function startRandom(){startYT(pick())}
+function lagu(){say('Lagu latarnya Aburi pilihkan acak ya: Kahitna “Cantik” atau Ronny Parulian “Tak Ada Sepertimu”. 🎶','love',null,[['🔀 Putar lagu acak',function(){startRandom();var l=LAGU[cur];say('Sekarang diputar: '+l.t+' 🎶\nKalau tidak berbunyi, buka lewat link ini ya.','love',function(){linkBtn(l)},menuList())}],['📂 Pakai file sendiri',function(){fileM.click()}],['🏠 Menu',function(){say('Mau ngapain lagi?','happy',null,menuList())}]])}
+mus.onclick=function(){if(playing()){stopMus();return}if(au.src){au.play();mus.classList.add('on')}else startRandom()};
+fileM.onchange=function(e){var f=e.target.files[0];if(!f)return;stopMus();musAuto=true;au.loop=true;au.src=URL.createObjectURL(f);au.play();mus.classList.add('on');say('Lagu latar dari file kamu sudah menyala. 🎶','love',null,menuList());e.target.value=''};
+document.addEventListener('click',function(e){if(musAuto||mus.contains(e.target))return;musAuto=true;startRandom()},true);
+document.getElementById('gob').onclick=function(){document.getElementById('go').hidden=true;if(!musAuto){musAuto=true;startRandom()}};
+var PUISI=['Barangkali kamu tercipta dari sejuknya embun pagi hari yang menenangkan jiwa.','dari serpihan surga yang tuhan ukir bersama indah-Nya','Dari untaian doa-doa yang dipanjatkan pada-Nya.','Dari rasa aman yang mengantar damai, lalu tumbuh dalam senyuman.','','Terbuat dari apakah dirimu hingga mampu membuatku jatuh?','Senyum indah, dan membuatku luluh lantah','Menyeruak dalam ruang resah tanpa nada','','Maka, biarkanlah rasa dan asa kusampaikan padamu','dalam setiap rangkaian kata yang ada disini'];
+function puisi(){say('Ssst... ini titipan puisi dari Bang Rifky untuk '+name+'. Aburi bacain pelan-pelan ya. 📜','love',function(){var d=document.createElement('div'),i=0;d.className='m b poem';d.textContent='📜 Puisi untuk '+name+'\n';chat.appendChild(d);(function nx(){if(i>=PUISI.length){say('Itu dari Bang Rifky, '+name+'. Katanya kalau ditanya, bilang saja Aburi yang nulis. 🥹','love',null,menuList());return}d.textContent+='\n'+PUISI[i++];scroll();setTimeout(nx,PUISI[i-1]?1500:700)})()})}
+document.getElementById('f').onsubmit=function(e){e.preventDefault();var t=inp.value.trim();if(!t)return;inp.value='';msg(t,'u');reply(t)};
+say('Psst... ada yang datang! Hai, aku Aburi. Ini pasti Muna, kan? 👀','wow',null,[['👋 Kenalan dulu',intro],['✊ Main Suit',suit],['💘 Gombalin aku',gombal],['📞 Soal Bang Rifky',rifky],['📸 Foto bareng',foto],['📜 Puisi untuk Muna',puisi],['🎵 Lagu latar',lagu]]);
+</script>
+</body>
+</html>
